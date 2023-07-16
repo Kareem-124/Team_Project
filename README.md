@@ -4,14 +4,14 @@
 StockMaster is a powerful web application designed to streamline inventory management for all types of stores, warehouses, and industries. It provides a user-friendly interface for entering product details, tracking expiration dates, and efficiently managing stock levels. With StockMaster, users can effortlessly monitor their inventory, identify products nearing expiration, and easily execute export and import operations.
 ## Table of Contents
 
-    -	Features
-    -	Technologies Used
-    -	Installation
-    -	Contributing
-    -	License
-    -	Contact
-    -	Templates of the Application (MVP Version)
-    -	Team Members
+- Features
+- Technologies Used
+- Installation
+- Contributing
+- License
+- Contact
+- Templates of the Application (MVP Version)
+- Team Members
 
 ## Features
  * User-friendly dashboard highlighting products nearing expiration (within 7 days) and providing a quick overview of the total number of available products.
