@@ -25,3 +25,7 @@ def dashboard(request):
 #This function renders the page that displays all products in the database
 def products(request):
     return render(request, 'products-page.html')
+
+
+def register(request):
+    pass
