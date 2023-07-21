@@ -58,4 +58,4 @@ def login(request):
     
 #Page : Order Page
 def order_page(request):
-    return render('/orders_page.html')
+    return render(request,'orders_page.html')
