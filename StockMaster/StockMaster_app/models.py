@@ -19,7 +19,11 @@ class UserManager(models.Manager):
         if len(postData['password'] or postData['password_conf']) < 8:
             errors['password_len'] = "Password should atleast be 8 charecters"
         if postData['password'] != postData['password_conf']:
+<<<<<<< Updated upstream
             errors['password_match'] = "Passwords do not matchx"
+=======
+            errors['password_match'] = "Passwords do not match"
+>>>>>>> Stashed changes
         return errors 
 
     def loginValidator(self, postData):
