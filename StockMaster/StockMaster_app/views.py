@@ -26,6 +26,6 @@ def dashboard(request):
 def products(request):
     return render(request, 'products-page.html')
 
-
+#This function for registration process
 def register(request):
     pass
