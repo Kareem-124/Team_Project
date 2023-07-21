@@ -13,7 +13,11 @@ def profile(request):
 
 #This function renders the dashboard after the user logs in to his acoount
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    context = {
+       'username' :  request.session['user'],
+       'user' : User.objects.get(id=request.session['user'])
+    }
+    return render(request, 'dashboard.html', context)
 
 #This function renders the page that displays all products in the database
 def products(request):

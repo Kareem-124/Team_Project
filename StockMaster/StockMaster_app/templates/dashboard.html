@@ -45,8 +45,6 @@
       text-align: center;
       color: red;
     }
-
-    qqqqqqqqqqqqqqqqqqqqqqq
   </style>
 </head>
 
@@ -78,12 +76,12 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">M. Ali</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{user.f_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Mohammed Ali</h6>
+              <h6>{{user.f_name}}</h6>
               <span>General Manager</span>
             </li>
             <li>
@@ -213,39 +211,39 @@
             <!-- Products Card -->
             <div class="col-xxl-4 col-xl-12">
               <a href="#">
-              <div class="card info-card customers-card">
-                <div class="card-body">
-                  <h5 class="card-title">Available Products</span></h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Available Products</span></h5>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>1244</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </a>
             </div>
-          <!-- End Products Card -->
+            <!-- End Products Card -->
 
             <!-- Orders Card -->
             <div class="col-xxl-4 col-xl-12">
               <a href="#">
-              <div class="card info-card customers-card">
-                <div class="card-body">
-                  <h5 class="card-title">Create Order</span></h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Create Order</span></h5>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>1244</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </a>
             </div><!-- End Orders Card -->
 
@@ -270,7 +268,7 @@
 
         <!-- Right side columns -->
       </div>
-<h3> <strong>Products about to Expire </strong></h3>
+      <h3> <strong>Products about to Expire </strong></h3>
       <!-- PRODUCTS ABOUT TO EXPIRE -->
       <div class="col-12">
         <div class="card top-selling overflow-auto">
