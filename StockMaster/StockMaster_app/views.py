@@ -22,7 +22,7 @@ def products(request):
 ################## Registration and Loging ################
 #This function renders the sign up page upon button click
 def signup_page(request):
-    return render(request, 'pages-register.html')
+    return render(request, 'pages-register-2.html')
 
 #This function for registration process
 def register(request):
