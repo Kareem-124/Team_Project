@@ -55,3 +55,7 @@ def login(request):
         request.session['user'] = user.id
         request.session['username'] = user.f_name
         return redirect('/dashboard')
+    
+#Page : Order Page
+def order_page(request):
+    return render('/orders_page.html')

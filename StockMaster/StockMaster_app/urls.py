@@ -9,7 +9,9 @@ urlpatterns = [
     path('dashboard/profile', views.profile, name='profile'),
     path('dashboard/products', views.products, name='products-page'),
     path('register', views.register, name='registrProcess'),
-    path('loging', views.login, name="loginProcess")
+    path('loging', views.login, name="loginProcess"),
+    path('order_page', views.order_page, name="order_page")
+    
 
 
 ]
