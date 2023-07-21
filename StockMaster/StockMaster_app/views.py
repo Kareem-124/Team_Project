@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import * 
+from django.shortcuts import render, redirect, reverse
+from .models import *
+from .models import Prodcuts 
 from django.contrib import messages
 
 
@@ -22,7 +23,7 @@ def products(request):
 ################## Registration and Loging ################
 #This function renders the sign up page upon button click
 def signup_page(request):
-    return render(request, 'pages-register-2.html')
+    return render(request, 'pages-register_2.html')
 
 #This function for registration process
 def register(request):
@@ -43,7 +44,8 @@ def register(request):
 #This function renders the Log In page upon button click
 def signin_page(request):
     return render(request, 'pages-login.html')
-#THis function for loging process
+
+#This function for loging process
 def login(request):
     errors = User.objects.loginValidator(request.POST)
     if len(errors) > 0:
@@ -59,3 +61,23 @@ def login(request):
 #Page : Order Page
 def order_page(request):
     return render(request,'orders_page.html')
+
+#This function renders the "add new product" form
+def add_prodcut(request):
+    return render(request, 'add_product.html')
+
+#This function handles POST data from "add new product" form and adds new PRODUCT to db:
+def save_product(request):
+    if request.method == 'POST':
+        params = dict()
+        
+        params['p_name'] = request.POST.get('p_name')
+        params['p_barcode'] = request.POST.get('p_barcode')
+        params['expire_date'] = request.POST.get('expire_date')
+        params['cost'] = request.POST.get('cost')
+        params['sale_price'] = request.POST.get('sale_price')
+        params['qty'] = request.POST.get('qty')
+        
+        Product.objects.create(**params)
+
+    return redirect(reverse('products-page'))
