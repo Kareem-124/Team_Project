@@ -48,12 +48,20 @@ class Prodcuts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    #orders_list
     
 
 class Orders(models.Model): 
     p_price = models.FloatField()
     qty_sell = models.IntegerField()
     products = models.ForeignKey(Prodcuts, on_delete=models.CASCADE, related_name='orders')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Order_list(models.Model): 
+    p_price = models.FloatField()
+    qty_sell = models.IntegerField()
+    products = models.ForeignKey(Prodcuts, on_delete=models.CASCADE, related_name='orders_list')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
