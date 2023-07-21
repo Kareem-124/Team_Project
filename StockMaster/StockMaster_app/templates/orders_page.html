@@ -117,18 +117,12 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/dashboard/profile">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="/dashboard/products">
@@ -138,14 +132,7 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="customers-page.html">
-          <i class="bi bi-envelope"></i>
-          <span>Customers</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="orders-page.html">
+        <a class="nav-link " href="{% url 'SM_app:order_page' %}">
           <i class="bi bi-card-list"></i>
           <span>Orders</span>
         </a>
@@ -158,11 +145,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Orders</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Orders</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -180,7 +167,7 @@
                     <label class="form-label">Barcode:</label>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" name="order_barcode">
                   </div>
                 </div>
                 <!-- Product Name -->
@@ -189,7 +176,7 @@
                     <label class="form-label">Product Quantity:</label>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" name="order_qty">
                   </div>
                 </div>
                 <!-- Product Price -->
@@ -198,7 +185,7 @@
                     <label class="form-label">Product Price:</label>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" name="order_price">
                   </div>
                 </div>
                 <div class="row mb-3">
