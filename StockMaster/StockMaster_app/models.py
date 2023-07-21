@@ -38,3 +38,22 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager() 
+
+class Prodcuts(models.Model): 
+    p_name = models.CharField(max_length=255)
+    p_barcode = models.IntegerField()
+    expire_date = models.DateTimeField()
+    cost = models.FloatField()
+    qty = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+
+class Orders(models.Model): 
+    p_price = models.FloatField()
+    qty_sell = models.IntegerField()
+    products = models.ForeignKey(Prodcuts, on_delete=models.CASCADE, related_name='orders')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
