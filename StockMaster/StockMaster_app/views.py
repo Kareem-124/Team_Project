@@ -15,8 +15,8 @@ def profile(request):
 #This function renders the dashboard after the user logs in to his acoount
 def dashboard(request):
     context = {
-       'username' :  request.session['user'],
-       'user' : User.objects.get(id=request.session['user'])
+    'username' :  request.session['user'],
+    'user' : User.objects.get(id=request.session['user'])
     }
     return render(request, 'dashboard.html', context)
 
