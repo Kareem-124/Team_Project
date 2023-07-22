@@ -51,6 +51,7 @@ class ProdcutManager(models.Manager):
         if postData['cost'] < 0: 
             errors['cost'] = "Cost can not be negative"
         return errors 
+        
 class Prodcut(models.Model): 
     p_name = models.CharField(max_length=255)
     p_barcode = models.IntegerField()

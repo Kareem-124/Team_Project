@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect, reverse
 from .models import *
-from .models import Prodcuts 
+# from .models import Prodcuts 
 from django.contrib import messages
-import date
+# import date
 
 # This function renders the homepage
 def homepage(request):
-    print ('hi')
-    x = date.today()
-    print(x)
     return render(request, 'homepage.html')
 
 #This function renders the User Profile page upon button click
@@ -88,3 +85,8 @@ def save_product(request):
         Product.objects.create(**params)
 
     return redirect(reverse('products-page'))
+
+
+def save_products(request):
+    if request.method == 'POST':
+        print(request)
