@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect, reverse
 from .models import *
-from .models import Prodcuts 
+from .models import Prodcut 
 from django.contrib import messages
-import date
+
 
 # This function renders the homepage
 def homepage(request):
-    print ('hi')
-    x = date.today()
-    print(x)
     return render(request, 'homepage.html')
 
 #This function renders the User Profile page upon button click
@@ -18,8 +15,8 @@ def profile(request):
 #This function renders the dashboard after the user logs in to his acoount
 def dashboard(request):
     context = {
-       'username' :  request.session['user'],
-       'user' : User.objects.get(id=request.session['user'])
+    'username' :  request.session['user'],
+    'user' : User.objects.get(id=request.session['user'])
     }
     return render(request, 'dashboard.html', context)
 

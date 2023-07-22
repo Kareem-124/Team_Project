@@ -56,7 +56,6 @@ class Prodcut(models.Model):
     p_barcode = models.IntegerField()
     expire_date = models.DateTimeField()
     cost = models.FloatField()
-    sale_price= models.FloatField()
     qty = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
