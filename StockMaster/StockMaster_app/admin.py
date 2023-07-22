@@ -3,5 +3,5 @@ from .models import *
 
 # Register your models here.
 admin.site.register(User)
-admin.site.register(Prodcuts)
-admin.site.register(Orders)
+admin.site.register(Prodcut)
+admin.site.register(Order)

@@ -157,12 +157,63 @@
         <!-- End Page Title -->
         <section class="section dashboard">
             <div class="row">
-                <!-- Left side columns -->
-                <!-- Top Selling -->
+                <div class="col-sm-12">
+                    <form action="">
+                        <!-- product Name  -->
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-sm-2 text-center fw-bold ">
+                                <label class="form-label">Product Name:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="p_name">
+                            </div>
+                        </div>
+                        <!-- Product barcode -->
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-sm-2 text-center fw-bold ">
+                                <label class="form-label">Barcode</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" name="p_barcode">
+                            </div>
+                        </div>
+                        <!-- Product Price -->
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-sm-2 text-center fw-bold ">
+                                <label class="form-label">Product Price:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" name="cost">
+                            </div>
+                        </div>
+                        <!-- Quantity -->
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-sm-2 text-center fw-bold ">
+                                <label class="form-label">Quantity</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control" name="qty">
+                            </div>
+                        </div>
+                        <!-- Expire_date -->
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-sm-2 text-center fw-bold ">
+                                <label class="form-label">Expire Date</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="expire_date">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-12 text-center">
+                                <button class="btn btn-primary">Add Product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-12">
                     <div class="card top-selling overflow-auto">
                         <div class="card-body pb-0">
-                            <button type="button" class="btn btn-primary rounded-pill">+ Add Product</button>
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
@@ -222,25 +273,6 @@
         </section>
     </main>
     <!-- End #main -->
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright
-            <strong>
-                <span>NiceAdmin</span>
-            </strong>
-            . All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by
-            <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </footer>
-    <!-- End Footer -->
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>

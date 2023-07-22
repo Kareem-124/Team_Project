@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import * 
 from django.contrib import messages
-
+import date
 
 # This function renders the homepage
 def homepage(request):
+    print ('hi')
+    x = date.today()
+    print(x)
     return render(request, 'homepage.html')
 
 #This function renders the User Profile page upon button click
@@ -26,7 +29,7 @@ def products(request):
 ################## Registration and Loging ################
 #This function renders the sign up page upon button click
 def signup_page(request):
-    return render(request, 'pages-register-2.html')
+    return render(request, 'pages-register2.html')
 
 #This function for registration process
 def register(request):
@@ -63,3 +66,4 @@ def login(request):
 #Page : Order Page
 def order_page(request):
     return render(request,'orders_page.html')
+
