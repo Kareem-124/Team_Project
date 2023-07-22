@@ -214,6 +214,7 @@
                 <div class="col-12">
                     <div class="card top-selling overflow-auto">
                         <div class="card-body pb-0">
+                            <a href="/dashboard/products/add_new" class="btn btn-primary rounded-pill">+ Add Product</a>
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
@@ -225,40 +226,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for product in products %}
                                     <tr>
                                         <td>
                                             <a href="#" class="text-primary fw-bold">
-                                                Chocolate KitKat
+                                                {{ product.p_name }}
                                             </a>
                                         </td>
                                         <td>$2.5</td>
                                         <td class="fw-bold">124</td>
                                         <td>$5,828</td>
-                                        <td>62</td>
-
+                                        <td>{{ product.qty }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="text-primary fw-bold">
-                                                Chocolate KitKat
-                                            </a>
-                                        </td>
-                                        <td>$2.5</td>
-                                        <td class="fw-bold">124</td>
-                                        <td>$5,828</td>
-                                        <td>62</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="text-primary fw-bold">
-                                                Chocolate KitKat
-                                            </a>
-                                        </td>
-                                        <td>$2.5</td>
-                                        <td class="fw-bold">124</td>
-                                        <td>$5,828</td>
-                                        <td>62</td>
-                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

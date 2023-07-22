@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+  <title>Registeration | StockMaster </title>
+</head>
+
+<body>
+
+  <main>
+    <form action="{% url 'registrProcess' %}" method="POST">
+      {% csrf_token %}
+      <table>
+        <th colspan="2">
+          Create Account
+        </th>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" name="f_name"></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" name="l_name"></td>
+        </tr>
+        <tr>
+          <td>Store Name:</td>
+          <td><input type="text" name="s_name"></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+          <td>Password Confirm:</td>
+          <td><input type="password" name="password_conf"></td>
+        </tr>
+        <tr colspan="2">
+          <td><input type="submit" value="Create Accuont"></td>
+        </tr>
+      </table>
+    </form>
+  </main>
+  <div id="error_messages">
+    {% if messages %}
+    <ul style="color: red; list-style-type: none;">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>
