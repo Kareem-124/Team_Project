@@ -155,7 +155,11 @@
 
     <!-- Main Content -->
     <section class="section dashboard">
-      <div class="row ">
+      <div class="row">
+        <div id="error_message" class="col-sm-12 text-center text-danger fs-3 d-none">Please Check That Entered Data is
+          correct</div>
+      </div>
+      <div class="row">
         <div class="col-lg-12 ">
           <div class="row">
             <div class="col-sm-12">
@@ -269,67 +273,77 @@
             product_price: $('#product_price').val(),
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
           },
+          success: function (response) {
+
+            console.log(response.message);
+            if(response.message == "Success"){
+              $("#error_message").addClass("d-none");
+            }
+            else{
+              $("#error_message").removeClass("d-none");
+            }
+              
+          },
+          error: function (response) {
+          },
         });
 
       });
-      setInterval(function(){
+      setInterval(function () {
         $.ajax({
-          type:'GET',
+          type: 'GET',
           url: "{% url 'SM_app:get_order_list' %}",
-          success:function(response){
-            if(response.order_list.length == 0){
+          success: function (response) {
+            if (response.order_list.length == 0) {
               $('#table-body').empty();
               console.log("No Data Available");
             }
-            else{
-            console.log(response.order_list.length);
-            console.log(response.order_list[0].products__p_barcode);
-            $('#table-body').empty();
-            for (var key in response.order_list){
-              console.log(key);
-              index = Number(key) + 1;
-              index = index.toString()
-              console.log(response.order_list[key]);
-              id = 'row' + key;
-              $('#table-body').append("<tr id ="+id+">");
-              $('#'+id).append('<th scope="row">' + index + '</th>');
-              
-              
-              var temp1 ="<td>"+ response.order_list[key].products__p_name + "</td>";
-              var temp2 ="<td>"+ response.order_list[key].products__p_barcode + "</td>";
-              var temp3 ="<td>"+ response.order_list[key].qty_sell + "</td>";
-              var temp4 ="<td>"+ response.order_list[key].p_price + "</td>";
-              var temp5 ="<td>"+ '<a href="#" id ="remove_order_list" data-target-url="remove_order_list/'+ response.order_list[key].id+ '" data-order-list-id="'+ response.order_list[key].id+'" class="remove_order_list"> Remove </a></td>';
-              $('#'+id).append(temp1);
-              $('#'+id).append(temp2);
-              $('#'+id).append(temp3);
-              $('#'+id).append(temp4);
-              $('#'+id).append(temp5);
+            else {
+              // console.log(response.order_list.length);
+              // console.log(response.order_list[0].products__p_barcode);
+              $('#table-body').empty();
+              for (var key in response.order_list) {
+                // console.log(key);
+                index = Number(key) + 1;
+                index = index.toString()
+                // console.log(response.order_list[key]);
+                id = 'row' + key;
+                $('#table-body').append("<tr id =" + id + ">");
+                $('#' + id).append('<th scope="row">' + index + '</th>');
 
-            }
+
+                var temp1 = "<td>" + response.order_list[key].products__p_name + "</td>";
+                var temp2 = "<td>" + response.order_list[key].products__p_barcode + "</td>";
+                var temp3 = "<td>" + response.order_list[key].qty_sell + "</td>";
+                var temp4 = "<td>" + response.order_list[key].p_price + "</td>";
+                var temp5 = "<td>" + '<a href="#" id ="remove_order_list" data-target-url="remove_order_list/' + response.order_list[key].id + '" data-order-list-id="' + response.order_list[key].id + '" class="remove_order_list"> Remove </a></td>';
+                $('#' + id).append(temp1);
+                $('#' + id).append(temp2);
+                $('#' + id).append(temp3);
+                $('#' + id).append(temp4);
+                $('#' + id).append(temp5);
+
+              }
             }
           },
-          
-          error: function(response){
-            alert('error getting data');
-          },
-        
+
+
         });
-      },500);
+      }, 500);
       $(document).on('click', '.remove_order_list', function (e) {
-    e.preventDefault();
-    var targetUrl = $(this).data('target-url');
-    var orderListId = $(this).data('order-list-id');
+        e.preventDefault();
+        var targetUrl = $(this).data('target-url');
+        var orderListId = $(this).data('order-list-id');
 
-    console.log("Clicked the Remove link!");
-    console.log("targetUrl:", targetUrl);
-    console.log("orderListId:", orderListId);
+        // console.log("Clicked the Remove link!");
+        // console.log("targetUrl:", targetUrl);
+        // console.log("orderListId:", orderListId);
 
-    $.ajax({
-      url: targetUrl,
-      type: "GET",
-    });
-  });
+        $.ajax({
+          url: targetUrl,
+          type: "GET",
+        });
+      });
     });
 
   </script>

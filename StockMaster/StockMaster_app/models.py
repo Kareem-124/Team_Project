@@ -51,6 +51,17 @@ class ProdcutManager(models.Manager):
         if postData['cost'] < 0: 
             errors['cost'] = "Cost can not be negative"
         return errors 
+
+    def order_list_validation(self,data):
+        errors = {}
+        if len(data['barcode']) < 0:
+            errors['barcode'] = "Please Enter The Barcode Number"
+        check = Prodcut.objects.filter(p_barcode = data['barcode'])
+        if check[0] == None :
+            errors['barcode_not_exists'] = "The Barcode you entered dose not exists"
+        return errors
+
+
 class Prodcut(models.Model): 
     p_name = models.CharField(max_length=255)
     p_barcode = models.IntegerField()
@@ -75,4 +86,5 @@ class Order_list(models.Model):
     products = models.ForeignKey(Prodcut, on_delete=models.CASCADE, related_name='orders_list')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = ProdcutManager()
 
