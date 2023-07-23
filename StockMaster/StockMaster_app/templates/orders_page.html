@@ -45,7 +45,6 @@
       text-align: center;
       color: red;
     }
-
   </style>
 </head>
 
@@ -197,50 +196,35 @@
               </form>
             </div>
             <hr>
-            
 
-      </div>
-      <div class="row ">
-        <div class="col-sm-12">
-          <table class="table table-striped table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Product Barcode</th>
-                <th scope="col">Product Quantity</th>
-                <th scope="col">Product Price</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr >
-                <th scope="row" >1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>10</td>
-                <td>@mdo</td>
-                <td><a href="">Remove</a></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>20</td>
-                <td>@mdo</td>
-                <td><a href="">Remove</a></td>
-              </tr>
-            </tbody>
-            </table>
-            <div class="row">
-              <div class="col-sm-12 text-end">
-                <button class="btn btn-primary">Proceed Order</button>
-                <button class="btn btn-danger">Clear All</button>
+
+          </div>
+          <div class="row ">
+            <div class="col-sm-12">
+              <table class="table table-striped table-hover text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Barcode</th>
+                    <th scope="col">Product Quantity</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-sm-12 text-end">
+                  <button class="btn btn-primary">Proceed Order</button>
+                  <button class="btn btn-danger">Clear All</button>
+                </div>
               </div>
             </div>
-        </div> 
-      </div>
-      
+          </div>
+
 
     </section>
 
@@ -270,27 +254,85 @@
   <script src="{% static 'js/main.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script>
-      $("#order_form").submit(function(e){
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#order_form").submit(function (e) {
         // Prevent the page from re-freshing
         e.preventDefault();
         $.ajax({
-          type:'POST',
-          url:"{% url 'SM_app:order_list_process'  %}",
-          data:{
-            barcode:$('#barcode').val(),
-            product_qty:$('#product_qty').val(),
-            product_price:$('#product_price').val(),
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-          },
-          success:function(){
-            alert('Done');
+          type: 'POST',
+          url: "{% url 'SM_app:order_list_process'  %}",
+          data: {
+            barcode: $('#barcode').val(),
+            product_qty: $('#product_qty').val(),
+            product_price: $('#product_price').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
           },
         });
 
       });
-    </script>
+      setInterval(function(){
+        $.ajax({
+          type:'GET',
+          url: "{% url 'SM_app:get_order_list' %}",
+          success:function(response){
+            if(response.order_list.length == 0){
+              $('#table-body').empty();
+              console.log("No Data Available");
+            }
+            else{
+            console.log(response.order_list.length);
+            console.log(response.order_list[0].products__p_barcode);
+            $('#table-body').empty();
+            for (var key in response.order_list){
+              console.log(key);
+              index = Number(key) + 1;
+              index = index.toString()
+              console.log(response.order_list[key]);
+              id = 'row' + key;
+              $('#table-body').append("<tr id ="+id+">");
+              $('#'+id).append('<th scope="row">' + index + '</th>');
+              
+              
+              var temp1 ="<td>"+ response.order_list[key].products__p_name + "</td>";
+              var temp2 ="<td>"+ response.order_list[key].products__p_barcode + "</td>";
+              var temp3 ="<td>"+ response.order_list[key].qty_sell + "</td>";
+              var temp4 ="<td>"+ response.order_list[key].p_price + "</td>";
+              var temp5 ="<td>"+ '<a href="#" id ="remove_order_list" data-target-url="remove_order_list/'+ response.order_list[key].id+ '" data-order-list-id="'+ response.order_list[key].id+'" class="remove_order_list"> Remove </a></td>';
+              $('#'+id).append(temp1);
+              $('#'+id).append(temp2);
+              $('#'+id).append(temp3);
+              $('#'+id).append(temp4);
+              $('#'+id).append(temp5);
+
+            }
+            }
+          },
+          
+          error: function(response){
+            alert('error getting data');
+          },
+        
+        });
+      },500);
+      $(document).on('click', '.remove_order_list', function (e) {
+    e.preventDefault();
+    var targetUrl = $(this).data('target-url');
+    var orderListId = $(this).data('order-list-id');
+
+    console.log("Clicked the Remove link!");
+    console.log("targetUrl:", targetUrl);
+    console.log("orderListId:", orderListId);
+
+    $.ajax({
+      url: targetUrl,
+      type: "GET",
+    });
+  });
+    });
+
+  </script>
 </body>
 
 </html>

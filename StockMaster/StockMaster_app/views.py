@@ -3,6 +3,7 @@ from .models import *
 from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
+from django.http import HttpResponse
 
 
 # This function renders the homepage
@@ -67,14 +68,31 @@ def is_ajax(request):
 
 #Process: Order list
 def order_list_process(request):
+    print("I entered this sction")
     if is_ajax(request = request) and request.method == "POST":
         # ADD Validation
-        product = Prodcuts.objects.get(p_barcode=request.POST['barcode'])
+        print("I entered this sction2")
+        product = Prodcut.objects.get(p_barcode=request.POST['barcode'])
+        print(product)
         order_list_qty = request.POST['product_qty'] 
         order_list_price = request.POST['product_price'] 
         Order_list.objects.create(p_price=order_list_price,
                                 qty_sell=order_list_qty,
-                                product=product)
+                                products=product)
         return JsonResponse({'message': 'Success'})
     else:
         return JsonResponse({'message': 'Invalid request'})
+
+def get_order_list(request):
+    order_list = Order_list.objects.all().values('id','p_price', 'qty_sell', 'products__p_name', 'products__p_barcode')
+
+    print(list(order_list)) # delete me later this is for debugging
+    return JsonResponse({"order_list":list(order_list)})
+# Process: Delete
+def remove_order_list(request,order_id):
+    order_list = Order_list.objects.get(id=order_id)
+    order_list.delete()
+    return JsonResponse({'message': 'Success'})
+
+
+
