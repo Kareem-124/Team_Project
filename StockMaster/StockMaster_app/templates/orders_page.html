@@ -54,7 +54,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="#" class="logo d-flex align-items-center">
+      <a href="{% url 'SM_app:homepage' %}" class="logo d-flex align-items-center">
         <img src="{% static 'img/logo.png' %}" alt="">
         <span class="d-none d-lg-block">StockMaster</span>
       </a>
@@ -76,13 +76,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">M. Ali</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{user.f_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Mohammed Ali</h6>
-              <span>General Manager</span>
+              <h6>{{user.f_name}}</h6>
+              <span>Store Manager</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -98,7 +98,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'SM_app:logout_process' %}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -109,7 +109,7 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
-
+  {% if user %}
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
@@ -222,8 +222,8 @@
               </table>
               <div class="row">
                 <div class="col-sm-12 text-end">
-                  <button class="btn btn-primary">Proceed Order</button>
-                  <button class="btn btn-danger">Clear All</button>
+                  <a href ="{% url 'SM_app:process_order' %}" class="btn btn-primary">Proceed Order</a>
+                  <a href = "{% url 'SM_app:clear_all_order_list_process' %}" class="btn btn-danger">Clear All</a>
                 </div>
               </div>
             </div>
@@ -347,6 +347,9 @@
     });
 
   </script>
+{% else %}
+<h1 class="text-danger" style="margin-top: 5rem;">Access Denied !! Please Sign in !!</h1>
+{% endif %}
 </body>
 
 </html>
