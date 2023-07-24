@@ -38,21 +38,8 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager() 
-
-class ProdcutManager(models.Manager): 
-    def ProductValidator(self, postData):
-        errors = {}
-        if len(postData['p_name']) < 2:
-            errors['p_name'] = "Prodcut Name should at least be 2 charecters"
-        if len(postData['p_barcode']) < 5:
-            errors['p_barcode'] = "Barcode should at least be 5 numbers"
-        if postData['qty'] < 0: 
-            errors['qty'] = "Quantity can not be negative"
-        if postData['cost'] < 0: 
-            errors['cost'] = "Cost can not be negative"
-        return errors 
-        
-class Prodcut(models.Model): 
+      
+class Product(models.Model): 
     p_name = models.CharField(max_length=255)
     p_barcode = models.IntegerField()
     expire_date = models.DateTimeField()
@@ -66,14 +53,14 @@ class Prodcut(models.Model):
 class Order(models.Model): 
     p_price = models.FloatField()
     qty_sell = models.IntegerField()
-    products = models.ForeignKey(Prodcut, on_delete=models.CASCADE, related_name='orders')
+    products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Order_list(models.Model): 
     p_price = models.FloatField()
     qty_sell = models.IntegerField()
-    products = models.ForeignKey(Prodcut, on_delete=models.CASCADE, related_name='orders_list')
+    products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders_list')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

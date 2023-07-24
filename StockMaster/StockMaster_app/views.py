@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect, reverse
 from .models import *
 # from .models import Prodcuts 
 from django.contrib import messages
-# import date
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 # This function renders the homepage
 def homepage(request):
@@ -19,10 +22,6 @@ def dashboard(request):
     'user' : User.objects.get(id=request.session['user'])
     }
     return render(request, 'dashboard.html', context)
-
-#This function renders the page that displays all products in the database
-def products(request):
-    return render(request, 'products-page.html')
 
 ################## Registration and Loging ################
 #This function renders the sign up page upon button click
@@ -61,32 +60,36 @@ def login(request):
         request.session['user'] = user.id
         request.session['username'] = user.f_name
         return redirect('/dashboard')
-    
-#Page : Order Page
-def order_page(request):
-    return render(request,'orders_page.html')
+################# This is for Prodcut ####################################
+#This function renders the page that displays all products in the database
+def display_products(request, user_id):
+    context = {
+        'user' : User.objects.get(id=user_id)
+    }
+    return render(request, 'display_products-page.html', context)
 
-#This function renders the "add new product" form
-def add_prodcut(request):
-    return render(request, 'add_product.html')
-
-#This function handles POST data from "add new product" form and adds new PRODUCT to db:
-def save_product(request):
-    if request.method == 'POST':
-        params = dict()
-        
-        params['p_name'] = request.POST.get('p_name')
-        params['p_barcode'] = request.POST.get('p_barcode')
-        params['expire_date'] = request.POST.get('expire_date')
-        params['cost'] = request.POST.get('cost')
-        params['sale_price'] = request.POST.get('sale_price')
-        params['qty'] = request.POST.get('qty')
-        
-        Product.objects.create(**params)
-
-    return redirect(reverse('products-page'))
 
 
 def save_products(request):
-    if request.method == 'POST':
-        print(request)
+    try:
+        if request.method == 'POST':
+            data = request.POST.get('data')
+            try:
+                products = json.loads(data)
+                # Save products to the database
+                for product in products:
+                    new_product = Product(
+                        p_name=product['p_name'],
+                        p_barcode=int(product['p_barcode']),
+                        expire_date=product['expire_date'],
+                        cost=int(product['cost']),
+                        qty=int(product['qty']),
+                        user=User.objects.get(id=request.session.get('user'))
+                    )
+                    new_product.save()
+
+                return JsonResponse({'message': 'Products saved successfully'})
+            except Exception as e:
+                return JsonResponse({'error': 'Error saving products: ' + str(e)}, status=500)
+    except Exception as e:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)

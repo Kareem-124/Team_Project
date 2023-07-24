@@ -304,7 +304,7 @@
     new simpleDatatables.DataTable(datatable);
   })
 
-  /**
+  /**  
    * Autoresize echart charts
    */
   const mainContainer = select('#main');
