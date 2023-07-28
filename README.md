@@ -58,7 +58,7 @@ python manage.py runserver
 StockMaster is licensed under the MIT License. You are free to use, modify, and distribute the code according to the terms of the license.
 
 ## Contact
-For any inquiries or further information, please contact the project maintainers at kareem.malhis@outlook.com or //// or //// 
+For any inquiries or further information, please contact the project maintainers at kareem.malhis@outlook.com or hamadaraed19@gmail.com  or muqbel.yazan@gmail.com 
 
 ## Project team members:
 The StockMaster project is developed and maintained by the following team members:
